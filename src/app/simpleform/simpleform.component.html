@@ -1,0 +1,90 @@
+<div class="d-flex align-items-center justify-content-center">
+  <div class="jumbotron">
+    <form [formGroup]="myform" (ngSubmit)="onSubmit(myform)">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Enter email"
+          [ngClass]="{
+            'is-invalid':
+              controls['email'].errors &&
+              (controls['email'].touched || controls['email'].dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            controls['email'].errors &&
+            (controls['email'].touched || controls['email'].dirty)
+          "
+        >
+          <div *ngIf="controls['email'].errors['required']">
+            Email is required
+          </div>
+          <div *ngIf="controls['email'].errors['email']">
+            Email is not a valid format
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          formControlName="password"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid':
+              controls['password'].errors &&
+              (controls['password'].touched || controls['password'].dirty)
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="
+            controls['password'].errors &&
+            (controls['password'].touched || controls['password'].dirty)
+          "
+        >
+          <div *ngIf="controls['password'].errors['required']">
+            Password is required
+          </div>
+          <div *ngIf="controls['password'].errors['passwordValidator']">
+            password length should be greater than 10
+          </div>
+        </div>
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          formControlName="agree"
+          class="form-check-input"
+          id="exampleCheck1"
+          [ngClass]="{
+            'is-invalid': controls['password'].errors
+          }"
+        />
+        <label
+          class="form-check-label"
+          for="exampleCheck1"
+          [ngClass]="{
+            'is-invalid': controls['password'].errors
+          }"
+          >Check me out</label
+        >
+
+        <div class="invalid-feedback" *ngIf="controls['agree'].errors">
+          <div *ngIf="controls['agree'].errors['required']">
+            Please Agree T&C's
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div>{{ myform.value | json }}</div>
+  </div>
+</div>
